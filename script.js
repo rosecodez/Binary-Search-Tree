@@ -1,4 +1,3 @@
-// A binary tree node
 // eslint-disable-next-line max-classes-per-file
 class Node {
   constructor(data) {
@@ -14,6 +13,7 @@ class Tree {
   }
 
   buildTree(array, start, end) {
+    // eslint-disable-next-line radix
     const mid = parseInt((start + end) / 2);
     const node = new Node(array[mid]);
     node.left = this.buildTree(array, start, mid - 1);
@@ -21,5 +21,17 @@ class Tree {
     return node;
   }
 }
-const array1 = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+const prettyPrint = (node, prefix = '', isLeft = true) => {
+  if (node === null) {
+    return;
+  }
+  if (node.right !== null) {
+    prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+  }
+  console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+  if (node.left !== null) {
+    prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+  }
+};
+const array1 = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 console.log(array1);
