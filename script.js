@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-param-reassign */
 // eslint-disable-next-line max-classes-per-file
 class Node {
   constructor(data) {
@@ -8,7 +10,8 @@ class Node {
 }
 
 class Tree {
-  constructor(root) {
+  constructor(array, root) {
+    this.array = array;
     this.root = null;
   }
 
@@ -22,7 +25,7 @@ class Tree {
   }
 
   // method that creates a new node to be inserted
-  insertData(data) {
+  insert(data) {
     const newNode = new Node(data);
     // if root is null
     if (this.root === null) {
@@ -37,25 +40,73 @@ class Tree {
   // method to insert node in tree
   insertNode(node, newNode) {
     if (newNode.data < node.data) {
-      // if left is null
+    // if left is null
       if (node.left === null) {
-        // insert here
+      // insert here
         node.left = newNode;
       } else {
-        // if left is not null, recur until null is found
+      // if left is not null, recur until null is found
         this.insertNode(node.left, newNode);
       }
     } else {
-      // if right is null
+    // if right is null
     } if (node.right === null) {
-      // insert node here
+    // insert node here
       node.right = newNode;
     } else {
-      // if right is not null, recur until null is found
+    // if right is not null, recur until null is found
       this.insertNode(node.right, newNode);
     }
   }
+
+  delete(data) {
+    this.root = this.deleteNode(this.root, data);
+  }
+
+  deleteNode(node, key) {
+    // if the root is null then tree is empty
+    if (node === null) return null;
+
+    // if data to be delete is less than root data
+    if (key < node.data) {
+      // move to left subtree
+      node.left = this.removeNode(node.left, key);
+      return node;
+    }
+
+    // if data to be deleted is greater than root data
+    if (key > node.data) {
+      // move to right subtree
+      node.right = this.removeNode(node.right, key);
+      return node;
+    }
+
+    // delete node with no children
+    if (node.left === null && node.right === null) {
+      node = null;
+      return node;
+    }
+
+    // deleting node with one children
+    if (node.left === null) {
+      node = node.right;
+      return node;
+    }
+
+    if (node.right === null) {
+      node = node.left;
+      return node;
+    }
+
+    // delete node with two children
+    const x = this.findMinNode(node.right);
+    node.data = x.data;
+
+    node.right = this.deleteNode(node.right, x.data);
+    return node;
+  }
 }
+
 // eslint-disable-next-line no-unused-vars
 const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
@@ -64,21 +115,20 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node.right !== null) {
     prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
   }
-  // eslint-disable-next-line no-console
   console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
   if (node.left !== null) {
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
   }
 };
 const bst = new Tree();
-bst.insertData(1);
-bst.insertData(5);
-bst.insertData(9);
-bst.insertData(14);
-bst.insertData(26);
-bst.insertData(33);
-bst.insertData(47);
-bst.insertData(164);
-bst.insertData(5921);
-// eslint-disable-next-line no-console
+bst.insert(1);
+bst.insert(4);
+bst.insert(9);
+bst.insert(14);
+bst.insert(26);
+bst.insert(33);
+bst.insert(47);
+bst.insert(164);
+bst.insert(5921);
+bst.delete(1);
 console.log(bst);
