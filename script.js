@@ -105,6 +105,30 @@ class Tree {
     node.right = this.deleteNode(node.right, x.data);
     return node;
   }
+
+  // function that accepts a value and return the node with the given value
+  find(node, data) {
+    // if tree is empty
+    if (node === null) {
+      // return null
+      return null;
+    }
+
+    // if data is less than node data
+    if (data < node.data) {
+      // move left
+      return this.find(node.left, data);
+    }
+
+    // if data is more than node data
+    if (data > node.data) {
+      // move right
+      return this.search(node.right, data);
+    }
+    // if data is equal to node data, return node
+    console.log(node);
+    return node;
+  }
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -131,4 +155,5 @@ bst.insert(47);
 bst.insert(164);
 bst.insert(5921);
 bst.delete(1);
+bst.find(14);
 console.log(bst);
