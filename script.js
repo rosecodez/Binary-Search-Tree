@@ -144,6 +144,36 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
   }
 };
+// function that accepts a random optional
+// callback function as its parameter
+// it should traverse the tree in breadth-first level order
+// and provide each node as argument to the callback
+const levelOrder = function (root) {
+  const result = [];
+
+  const queue = [];
+
+  queue.push(root);
+
+  while (queue.length) {
+    const levelSize = queue.length;
+    const currentLevel = [];
+
+    for (let i = 0; i < levelSize; i++) {
+      const currentNode = queue.shift();
+      currentLevel.push(currentNode.data);
+
+      if (currentNode.left) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right) {
+        queue.push(currentNode.right);
+      }
+    }
+    result.push(currentLevel);
+  }
+  return result;
+};
 const bst = new Tree();
 bst.insert(1);
 bst.insert(4);
@@ -157,3 +187,12 @@ bst.insert(5921);
 bst.delete(1);
 bst.find(14);
 console.log(bst);
+
+const root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+root.right.left = new Node(6);
+root.right.right = new Node(7);
+console.log(levelOrder(root));
