@@ -15,6 +15,7 @@ class Tree {
     this.root = null;
   }
 
+  // build tree method
   buildTree(array, start, end) {
     // eslint-disable-next-line radix
     const mid = parseInt((start + end) / 2);
@@ -59,25 +60,26 @@ class Tree {
     }
   }
 
+  // delete method
   delete(data) {
     this.root = this.deleteNode(this.root, data);
   }
 
-  deleteNode(node, key) {
+  deleteNode(node, data) {
     // if the root is null then tree is empty
     if (node === null) return null;
 
     // if data to be delete is less than root data
-    if (key < node.data) {
+    if (data < node.data) {
       // move to left subtree
-      node.left = this.removeNode(node.left, key);
+      node.left = this.removeNode(node.left, data);
       return node;
     }
 
     // if data to be deleted is greater than root data
-    if (key > node.data) {
+    if (data > node.data) {
       // move to right subtree
-      node.right = this.removeNode(node.right, key);
+      node.right = this.removeNode(node.right, data);
       return node;
     }
 
@@ -106,7 +108,7 @@ class Tree {
     return node;
   }
 
-  // function that accepts a value and return the node with the given value
+  // method that accepts a value and return the node with the given value
   find(node, data) {
     // if tree is empty
     if (node === null) {
@@ -146,6 +148,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 };
 // function that accepts a random optional
 // callback function as its parameter
+
 // it should traverse the tree in breadth-first level order
 // and provide each node as argument to the callback
 const levelOrder = function (root) {
@@ -174,6 +177,19 @@ const levelOrder = function (root) {
   }
   return result;
 };
+// function that return nodes in non-decreasing order
+function inOrder(node) {
+  // if node is null return
+  if (node == null) {
+    return;
+  }
+  // recur children
+  inOrder(node.left);
+  // print data
+  console.log(`${node.data} `);
+  inOrder(node.right);
+}
+
 const bst = new Tree();
 bst.insert(1);
 bst.insert(4);
@@ -196,3 +212,5 @@ root.left.right = new Node(5);
 root.right.left = new Node(6);
 root.right.right = new Node(7);
 console.log(levelOrder(root));
+console.log('inorder traversal');
+console.log(inOrder(root));
