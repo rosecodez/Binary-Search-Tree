@@ -211,6 +211,20 @@ function postOrder(node) {
   postOrder(node.right);
   console.log(`${node.data} `);
 }
+// height function that represent the number of edge
+// in the longest path frm a given node to a leaf node
+function height(node) {
+  // if node is null 0
+  if (node == null) {
+    return 0;
+  }
+  const leftSide = height(node.left);
+  const rightSide = height(node.right);
+  if (leftSide > rightSide) {
+    return (leftSide + 1);
+  }
+  return (rightSide + 1);
+}
 const bst = new Tree();
 bst.insert(1);
 bst.insert(4);
@@ -240,3 +254,4 @@ console.log('preorder traversal');
 console.log(preOrder(root));
 console.log('postorder traversal');
 console.log(postOrder(root));
+console.log(`Tree height is: ${height(root)}`);
