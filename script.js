@@ -189,6 +189,17 @@ function inOrder(node) {
   console.log(`${node.data} `);
   inOrder(node.right);
 }
+// function
+function preOrder(node) {
+  // if node is null return
+  if (node == null) {
+    return;
+  }
+  // order difference, we first console log the data, then recur
+  console.log(`${node.data} `);
+  preOrder(node.left);
+  preOrder(node.right);
+}
 
 const bst = new Tree();
 bst.insert(1);
@@ -211,6 +222,9 @@ root.left.left = new Node(4);
 root.left.right = new Node(5);
 root.right.left = new Node(6);
 root.right.right = new Node(7);
+console.log('level order');
 console.log(levelOrder(root));
 console.log('inorder traversal');
 console.log(inOrder(root));
+console.log('preorder traversal');
+console.log(preOrder(root));
