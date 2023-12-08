@@ -189,7 +189,8 @@ function inOrder(node) {
   console.log(`${node.data} `);
   inOrder(node.right);
 }
-// function
+
+// preorder function
 function preOrder(node) {
   // if node is null return
   if (node == null) {
@@ -201,6 +202,15 @@ function preOrder(node) {
   preOrder(node.right);
 }
 
+// postorder function
+function postOrder(node) {
+  if (node == null) {
+    return;
+  }
+  postOrder(node.left);
+  postOrder(node.right);
+  console.log(`${node.data} `);
+}
 const bst = new Tree();
 bst.insert(1);
 bst.insert(4);
@@ -228,3 +238,5 @@ console.log('inorder traversal');
 console.log(inOrder(root));
 console.log('preorder traversal');
 console.log(preOrder(root));
+console.log('postorder traversal');
+console.log(postOrder(root));
