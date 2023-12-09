@@ -211,7 +211,7 @@ function postOrder(node) {
   postOrder(node.right);
   console.log(`${node.data} `);
 }
-// height function that represent the number of edge
+// height function that represents the number of edge
 // in the longest path frm a given node to a leaf node
 function height(node) {
   // if node is null 0
@@ -225,6 +225,28 @@ function height(node) {
   }
   return (rightSide + 1);
 }
+// depth function that accepts a node and returns its depth
+// depth is defined as the number of edges in the path
+// from a given node to the three's root note
+function depth(root, x) {
+  if (root == null) {
+    return -1;
+  }
+
+  let distance = -1;
+  // if x is current node
+  if ((root.data === x)
+        // check if x is in the left subtree
+        || (distance = depth(root.left, x)) >= 0
+        // check if x is in the right subtree
+        || (distance = depth(root.right, x)) >= 0)
+
+  // Return depth of the node
+  { return distance + 1; }
+
+  return distance;
+}
+
 const bst = new Tree();
 bst.insert(1);
 bst.insert(4);
@@ -255,3 +277,5 @@ console.log(preOrder(root));
 console.log('postorder traversal');
 console.log(postOrder(root));
 console.log(`Tree height is: ${height(root)}`);
+const k = 25;
+console.log(`Depth: ${depth(root, k)}`);
