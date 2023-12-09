@@ -246,6 +246,17 @@ function depth(root, x) {
 
   return distance;
 }
+function isBalanced(root) {
+  if (root == null) {
+    return true;
+  }
+  const lh = height(root.left);
+  const rh = height(root.right);
+  if (Math.abs(lh - rh) <= 1 && isBalanced(root.left) === true && isBalanced(root.right) === true) {
+    return true;
+  }
+  return false;
+}
 
 const bst = new Tree();
 bst.insert(1);
@@ -279,3 +290,6 @@ console.log(postOrder(root));
 console.log(`Tree height is: ${height(root)}`);
 const k = 25;
 console.log(`Depth: ${depth(root, k)}`);
+if (isBalanced(root)) {
+  console.log('tree is balanced');
+} else (console.log('tree is not balanced'));
