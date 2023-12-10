@@ -8,7 +8,6 @@ class Node {
     this.right = null;
   }
 }
-
 class Tree {
   constructor(array, root) {
     this.array = array;
@@ -257,7 +256,21 @@ function isBalanced(root) {
   }
   return false;
 }
-
+// function that traverses the bst and stores the nodes\
+function storeNodes(root, array) {
+  if (root == null) {
+    return;
+  }
+  storeNodes(root.left, array);
+  array.push(root);
+  storeNodes(root.right, array);
+}
+function rebalance(root) {
+  const array = [];
+  storeNodes(root, array);
+  const n = array.length;
+  return this.buildTree(array, 0, n - 1);
+}
 const bst = new Tree();
 bst.insert(1);
 bst.insert(4);
@@ -272,7 +285,7 @@ bst.delete(1);
 bst.find(14);
 console.log(bst);
 
-const root = new Node(1);
+let root = new Node(1);
 root.left = new Node(2);
 root.right = new Node(3);
 root.left.left = new Node(4);
@@ -293,3 +306,7 @@ console.log(`Depth: ${depth(root, k)}`);
 if (isBalanced(root)) {
   console.log('tree is balanced');
 } else (console.log('tree is not balanced'));
+
+root = new Tree(root);
+console.log('Rebalance tree: ');
+preOrder(root);
