@@ -310,3 +310,32 @@ if (isBalanced(root)) {
 root = new Tree(root);
 console.log('Rebalance tree: ');
 preOrder(root);
+
+// Create a binary search tree from an array of random numbers < 100
+const a = [];
+for (i = 0; i < 100; ++i) a[i] = i;
+
+function createRandom(arr) {
+  let tmp; let cur; let
+    tp = arr.length;
+  if (tp) {
+  // Run until tp becomes 0.
+    while (--tp) {
+    // Generating the random index
+      cur = Math.floor(Math.random() * (tp + 1));
+
+      // Getting the index(cur) value in variable(tmp)
+      tmp = arr[cur];
+
+      // Moving the index(tp) value to index(cur)
+      arr[cur] = arr[tp];
+
+      // Moving back the tmp value to
+      // index(tp), Swapping is done
+      arr[tp] = tmp;
+    }
+  }
+  return arr;
+}
+const BST = new Tree(createRandom(a).sort());
+console.log(BST);
